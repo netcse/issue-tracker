@@ -31,7 +31,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       className="max-w-xl space-y-3"
       onSubmit={handleSubmit(async (data) => {
         try {
-          await axios.post("/api/issues", data);
+          if (issue) await axios.patch("/api/issues/" + issue.id, data);
+          else await axios.post("/api/issues", data);
           router.push("/issues");
         } catch (error) {
           console.error(error);
@@ -57,8 +58,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           />
         )}
       />
-
-      <Button>Submit New Issue</Button>
+      <Button>{issue ? "Update Issue" : "Submit New Issue"}</Button>
     </form>
   );
 };
