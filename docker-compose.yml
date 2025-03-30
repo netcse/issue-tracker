@@ -21,11 +21,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: mysql://admin:nopass@localhost:3306/issue-tracker
+      DATABASE_URL: mysql://admin:nopass@db:3306/issue-tracker
     volumes:
       - .:/app
       - /app/node_modules
-    command: ["npm", "run", "dev"]
+    command: ["sh", "-c", "npx prisma migrate deploy && npm run dev"]
 
 volumes:
   db_data:
