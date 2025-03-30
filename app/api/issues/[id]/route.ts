@@ -2,12 +2,17 @@ import { issueSchema } from "@/app/validationSchemas";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
+// Define the expected type for the parameters
+interface Params {
+  id: string;
+}
+
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Params } // Explicitly define the type here
 ) {
   const body = await req.json();
-  const validation = await issueSchema.safeParse(body);
+  const validation = issueSchema.safeParse(body);
 
   if (!validation.success)
     return NextResponse.json(validation.error.format(), { status: 400 });
