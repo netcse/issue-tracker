@@ -1,7 +1,6 @@
 import { issueSchema } from "@/app/validationSchemas";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import delay from "delay";
 
 // Define the expected type for the parameters
 interface Params {
