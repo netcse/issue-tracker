@@ -1,6 +1,7 @@
 import { issueSchema } from "@/app/validationSchemas";
 import { prisma } from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import delay from "delay";
 
 // Define the expected type for the parameters
 interface Params {
@@ -36,6 +37,7 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Params } // Explicitly define the type here
 ) {
+
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) }
   })
